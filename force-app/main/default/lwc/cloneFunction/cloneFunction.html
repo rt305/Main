@@ -1,0 +1,53 @@
+<template>
+<template if:true={TempPopup}>
+<lightning-quick-action-panel header="Do you want to Clone this Lead?">
+    <lightning-layout>
+        <lightning-layout-item padding="around-small">
+    <lightning-button label="Yes" variant="brand" onclick={handleYesClick}></lightning-button>
+</lightning-layout-item>
+<lightning-layout-item padding="around-small">
+    <lightning-button label="No" variant="brand" onclick={handleNoClick}></lightning-button>
+</lightning-layout-item>
+</lightning-layout>
+</lightning-quick-action-panel>
+</template>
+<template if:true={OpenPopup}>
+    <lightning-quick-action-panel header="Select The Related Records that needs to be included">
+        <div>
+            <lightning-card title="Parties">
+                <template if:true={tempData}>
+                    <div class="slds-box">
+                        <lightning-datatable class="first" key-field="id" data={partyData.data}
+                            columns={PartiesColumns}>
+                        </lightning-datatable>
+                    </div>
+                </template>
+                <template if:false={tempData}>
+                    There is No Party Pecords
+                </template>
+            </lightning-card>
+            <lightning-card title="Documents">
+                <template if:true={dataData}>
+                    <div class="slds-box">
+                        <lightning-datatable class="second" key-field="id" data={dataData.data}
+                            columns={DocumentsColumns}>
+                        </lightning-datatable>
+                    </div>
+                </template>
+                <template if:false={dataData}>
+                    There is No Documents Records
+                </template>
+            </lightning-card>
+            </div>
+        <lightning-layout>
+            <lightning-layout-item padding="around-small">
+        <lightning-button label="Close" variant="brand" onclick={handleCloseClick}></lightning-button>
+    </lightning-layout-item>
+    <lightning-layout-item padding="around-small">
+        <lightning-button label="Add" variant="brand" onclick={handleAddClick}></lightning-button>
+    </lightning-layout-item>
+    </lightning-layout>
+    </lightning-quick-action-panel>
+</template>
+
+</template>

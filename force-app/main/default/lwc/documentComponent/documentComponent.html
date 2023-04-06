@@ -1,0 +1,89 @@
+<template>
+    <div if:true={isLoaded} class="cstm-spinner">
+        <lightning-spinner alternative-text="Loading..."></lightning-spinner>
+    </div>
+
+    <div class="slds-m-around--xx-large container-fluid">
+
+        <div class="slds-float_right slds-p-bottom_small">
+            <h1>
+                <b> Add Row </b>
+                <lightning-button-icon icon-name="utility:add" onclick={addRow}> </lightning-button-icon>
+            </h1>
+        </div>
+
+        <div class="container-fluid">
+            <lightning-record-edit-form object-api-name={objectName} record-id={documentRecordId}>
+                <table class="slds-table slds-table_bordered slds-table_cell-buffer">
+                    <thead>
+                        <tr class="slds-text-title_caps">
+                            <th scope="col">
+                                <div class="slds-truncate">#</div>
+                            </th>
+                            <th scope="col">
+                                <div class="slds-truncate" title="Party Name" onselect={handlePartyChange}>Party Name
+                                </div>
+                            </th>
+                            <th scope="col">
+                                <div class="slds-truncate" title="Document Master Name" onselect={handleDDMasterChange}>
+                                    Document Master Name</div>
+                            </th>
+                            <th scope="col">
+                                <div class="slds-truncate" title="Upload File">Upload File</div>
+                            </th>
+                            <th scope="col">
+                                <div class="slds-truncate" title="Upload File">Preview</div>
+                            </th>
+                            <th scope="col">
+                                <div class="slds-truncate" title="Action">DELETE</div>
+                            </th>
+                        </tr>
+
+                    </thead>
+                    <tbody>
+                        <template for:each={ddList} for:item="dd" for:index="index">
+                            <tr key={dd.key} id={dd.key}>
+                                <td>{index}</td>
+                                <td>
+                                    <lightning-input-field data-id={index} field-name="Party__c" value={dd.Party__c}
+                                        onchange={handlePartyChange} variant="label-hidden"></lightning-input-field>
+                                </td>
+                                <td>
+                                    <lightning-input-field data-id={index} field-name="Document_Master__c"
+                                        value={dd.Document_Master__c} onchange={handleMasterChange}
+                                        variant="label-hidden"></lightning-input-field>
+                                </td>
+                                <td>
+                                    <lightning-input if:false={dd.filename__c} type="file"
+                                        accept=".xlsx, .xls, .csv, .png, .doc, .docx, .pdf" data-id={index}
+                                        onchange={openfileUpload} variant="label-hidden" required></lightning-input>
+                                    <lightning-input if:true={dd.filename__c} value={dd.filename__c} readonly>
+                                    </lightning-input>
+                                </td>
+                                <td>
+                                    <lightning-button-icon icon-name="utility:preview" if:true={dd.cdid__c}
+                                        data-id={dd.cdid__c} label={dd.filname__c} value={dd.cdid__c}
+                                        onclick={filePreview}></lightning-button-icon>
+                                </td>
+                                <td>
+                                    <lightning-button-icon icon-name="utility:delete" data-id={index}
+                                        alternative-text="Delete record" class="slds-m-left_xx-small" data-value={dd.Id}
+                                        data-cdid={dd.cdid__c} onclick={removeRow} title="Delete record">
+                                    </lightning-button-icon>
+                                </td>
+                            </tr>
+                        </template>
+                    </tbody>
+
+
+                </table>
+                <div class="slds-align_absolute-center slds-p-around_medium">
+                    <lightning-button label="Submit" name="Submit" variant="brand" onclick={saveRecord}>
+                    </lightning-button>
+                </div>
+
+
+            </lightning-record-edit-form>
+        </div>
+    </div>
+</template>

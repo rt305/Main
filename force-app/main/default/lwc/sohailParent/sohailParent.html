@@ -1,0 +1,10 @@
+<template>
+    <lightning-card>
+        <h1>I am Parent Component</h1>
+        <lightning-button label="OpenChild" onclick={handleOpen}></lightning-button>
+        <template if:true={childSohail}>
+        <c-sohail-child onshahrukh={closeShahrukh}></c-sohail-child>
+    </template>
+
+    </lightning-card>    
+</template>

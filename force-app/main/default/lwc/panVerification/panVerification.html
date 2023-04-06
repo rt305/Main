@@ -1,0 +1,22 @@
+<template>
+    <lightning-card >
+        <div class="slds-align_absolute-center slds-text-heading_medium" style="height:5rem">Workflow Activities</div>
+        <lightning-layout horizontal-align="center">
+            <lightning-layout-item padding="around-small">
+                <div class="slds-p-around_x-small">
+                <lightning-button class={buttonClassForPAN} variant={buttonVariantForPAN} title="PAN verification" label="PAN verification" onclick={handlePanValidation}></lightning-button>
+                <template if:true={isLoading}>
+                    <lightning-spinner alternative-text="Loading" variant="brand" size="large">
+                    </lightning-spinner>
+               </template>
+                </div>
+                <div class="slds-p-around_x-small">
+                <lightning-button class={buttonClassForAadhaar} variant={buttonVariantForAadhhar} title="Aadhar verification" label="Aadhar verification" onclick={handleAadhaarValidation}></lightning-button>
+            </div>
+            <div class="slds-p-around_x-small">
+                <lightning-button class={buttonClassForDedupeCheck} variant={buttonVariantForDedupeCheck} title="Dedupe Check" label="Dedupe Check" onclick={handleDedupeCheck}>></lightning-button>
+            </div>
+            </lightning-layout-item>
+        </lightning-layout>
+    </lightning-card>
+</template>

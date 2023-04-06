@@ -1,0 +1,91 @@
+<!--
+  @description       : 
+  @author            : ChangeMeIn@UserSettingsUnder.SFDoc
+  @group             : 
+  @last modified on  : 09-15-2022
+  @last modified by  : ChangeMeIn@UserSettingsUnder.SFDoc
+-->
+<template>
+    
+    <lightning-card>
+        <div class="slds-p-right_xx-large slds-p-right_xx-large">
+        <div class="slds-p-left_x-small slds-p-right_x-small">
+            <div class="slds-p-right_XXXX-small slds-p-right_large">
+        <template if:true={customerVal}>
+    <lightning-input type="text" label="Customer id" onchange={searchKeyword}></lightning-input>
+    <br>
+    </template>
+    <template if:false={customerVal}>
+    <lightning-input type="text" label="Customer id" disabled></lightning-input>
+    <br>
+    </template>
+    <div class="slds-align_absolute-center">
+        <h3>OR</h3>
+    </div>
+     
+    <template if:true={otherOpt} >
+    <div class="slds-box slds-p-right_large">
+    <lightning-input type="text" label="First Name" onchange={searchfirstn} ></lightning-input>
+    <lightning-input type="text" label="Last Name" onchange={searchLastn}></lightning-input>
+    <lightning-input type="text" label="Pan card" onchange={searchPan} ></lightning-input>
+    <lightning-input type="date" label="DOB" onchange={searchBD} ></lightning-input>
+    </div>  
+    </template>
+    <template if:false={otherOpt}>
+    <div class="slds-box slds-p-right_large">
+        <lightning-input type="text" label="First Name" disabled ></lightning-input>
+        <lightning-input type="text" label="Last Name" disabled></lightning-input>
+        <lightning-input type="number" label="Pan card" disabled ></lightning-input>
+        <lightning-input type="date" label="DOB"  disabled ></lightning-input>
+    </div>
+    </template>
+    </div>
+    </div>
+</div>
+
+
+    <lightning-button class="slds-m-bottom_small slds-p-left_x-small" label="Search" variant="brand" onclick={checkLead}></lightning-button>
+    <template if:true={enableCreatebutton}>
+    <lightning-button class="slds-m-around_xx-small" label="Create New Lead"  variant="brand" onclick={createLeadbt}></lightning-button>
+
+</template>
+    <template if:true={callleadcreation}>
+    <c-create-lead
+    oncloseevent={closeEvent} get-value={pan} get-value1={fName1} get-value2={lName1}></c-create-lead>
+    </template>
+    
+    <lightning-layout>    
+    <template if:true={showtable}>
+        <lightning-layout-item size="9">
+            <b><p>Lead Details</p></b>
+        <lightning-datatable key-field="id" data={leaddata} columns={leadColumns}  show-row-number-column="true" hide-checkbox-column="true">
+        </lightning-datatable>
+    </lightning-layout-item>
+
+    </template>
+    <template if:true={falseshowtable}>
+        <lightning-layout-item size="9">
+            <b><p>Lead Details</p></b>
+            <p>There are no Leads records here...!!!</p>
+         </lightning-layout-item>
+
+    </template>
+    
+    <template if:true={showtableloan}>
+    <lightning-layout-item size="9">
+        <b><p>Loan Details</p></b>
+        <lightning-datatable key-field="id" data={loandata} columns={loanColumns}  show-row-number-column="true" hide-checkbox-column="true">
+        </lightning-datatable>
+    </lightning-layout-item>
+        </template>
+    <template if:true={falseshowtableloan}>
+            <lightning-layout-item size="9">
+                <b><p>Loan Details</p></b>
+                <p>There are no Loan records here...!!!</p>
+            </lightning-layout-item>
+                </template>
+        
+            </lightning-layout>
+        </lightning-card>
+   
+     </template>

@@ -1,0 +1,23 @@
+<template>
+
+    <lightning-button variant="brand" label="CreateCase" onclick={handleClick}></lightning-button>
+
+<template if:true={openIt}>
+    <lightning-record-edit-form object-api-name="Case">
+        <lightning-messages></lightning-messages>
+        <lightning-output-field field-name="AccountId"></lightning-output-field>
+        <lightning-output-field field-name="ContactId"></lightning-output-field>
+
+        <lightning-input-field field-name="Status"></lightning-input-field>
+        <lightning-input-field field-name="Subject"></lightning-input-field>
+        <lightning-input-field field-name="Description"></lightning-input-field>
+        <lightning-input-field field-name="SuppliedPhone"></lightning-input-field>
+        <lightning-input-field field-name="SuppliedEmail"></lightning-input-field>
+
+        <lightning-button variant="success" type="submit" label="Save"></lightning-button>
+        <lightning-button variant="destructive" label="Close" onclick={hadleClose}></lightning-button>
+
+
+    </lightning-record-edit-form>
+    </template>
+</template>
